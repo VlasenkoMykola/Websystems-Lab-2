@@ -42,8 +42,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Test Log As Artifact
+    - name: Test log to file
       run: mvn --file pom.xml clean test | tee log
+    - name: Upload log as artifact
+      uses: actions/upload-artifact@v4
       with:
         name: test_artifact
         path: ./log
