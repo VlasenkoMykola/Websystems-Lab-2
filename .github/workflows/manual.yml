@@ -43,12 +43,12 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Test log to file
-      run: mvn --file pom.xml clean test | tee log
+      run: mvn --file pom.xml clean test | tee log.txt
     - name: Upload log as artifact
       uses: actions/upload-artifact@v4
       with:
         name: test_artifact
-        path: ./log
+        path: ./log.txt
 
   release:
 
