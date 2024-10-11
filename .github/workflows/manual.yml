@@ -30,6 +30,24 @@ jobs:
     - name: Test
       run: mvn --file pom.xml clean test
 
+  test_artifact:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Test Log As Artifact
+      run: mvn --file pom.xml clean test | tee log
+      with:
+        name: test_artifact
+        path: ./log
+
   release:
 
     runs-on: ubuntu-latest
